@@ -1,0 +1,48 @@
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    color: #750808;
+    /* Initial color */
+  }
+
+  50% {
+    color: white;
+    /* Color to change to */
+  }
+
+  100% {
+    color: #750808;
+    /* Back to initial color */
+  }
+}
+
+.asterisk {
+  width: 0;
+  height: 0;
+  margin: 50px;
+  animation: pulse 2s infinite;
+  position: relative;
+  display: inline-block;
+}
+
+.asterisk::before {
+  content: '\002A';
+  position: absolute;
+  top: 0;
+  color: #750808;
+  animation: colorChange 2s infinite;
+  font-size: 50px;
+}

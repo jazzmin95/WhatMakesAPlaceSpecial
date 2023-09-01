@@ -1,52 +1,92 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import './AnimatedPulsingDot.css';
+import './PulsatingAsterisk.css';
+import { Box, Center, Title } from '@mantine/core';
 
 const MadridMap: React.FC = () => {
-
   const initialViewport = {
-    latitude:  40.416775, 
-    longitude: -3.703790,
-    zoom: 13,
+    latitude: 40.40463816651476,
+    longitude: -3.704453011618117,
+    zoom: 15,
   };
 
   const eduardo = useRef<HTMLDivElement | null>(null);
-  if (eduardo.current)  eduardo.current.classList.add('pulsing-dot');
-
   const hugo = useRef<HTMLDivElement | null>(null);
-  if (hugo.current)  hugo.current.classList.add('pulsing-dot');
+  const hannah = useRef<HTMLDivElement | null>(null);
+  const ruby = useRef<HTMLDivElement | null>(null);
 
-  const yasmine = useRef<HTMLDivElement | null>(null);
-  if (yasmine.current)  yasmine.current.classList.add('pulsing-dot');
+  const markers = [
+    {
+      name: 'Eduardo',
+      ref: eduardo,
+      latitude: 40.39878562330036,
+      longitude: -3.696836257672317,
+    },
+    {
+      name: 'Hugo',
+      ref: hugo,
+      latitude: 40.40507676770641,
+      longitude: -3.711228291084625,
+    },
+    {
+      name: 'Hannah',
+      ref: hannah,
+      latitude: 40.40974479488872,
+      longitude: -3.7092802622482846,
+    },
+    {
+      name: 'Ruby',
+      ref: ruby,
+      latitude: 40.40459391501095,
+      longitude: -3.7008492293440884,
+    },
+  ];
 
   return (
-    <div style={{ height: '100vh', width: '100vw' }}>
+    <Center h="100vh">
       <Map
         {...initialViewport}
-        mapboxAccessToken="pk.eyJ1IjoieWFzbWluLWUiLCJhIjoiY2xseHExNDg0Mm11bzNkcDg3Mjdta2J5dSJ9.ocCkdr6GPfVo3cOOiTE_tA"
-        mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+        mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+        mapStyle="mapbox://styles/mapbox/dark-v11"
       >
-        <Marker
-          latitude={40.39878562330036}
-          longitude={-3.696836257672317}
-        >
-          <div ref={eduardo} className="dot"/>
-        </Marker>
-         <Marker
-          latitude={40.40507676770641}
-          longitude={-3.711228291084625}
-        >
-          <div ref={hugo} className="dot"/>
-        </Marker>
+        {markers?.map((marker) => (
           <Marker
-          latitude={40.40974479488872}
-          longitude={-3.7092802622482846}
-        >
-          <div ref={yasmine} className="dot"/>
-        </Marker>
+            latitude={marker.latitude}
+            longitude={marker.longitude}
+            key={marker.name}
+          >
+            <Box ref={marker.ref} className="asterisk" />
+          </Marker>
+        ))}
       </Map>
-    </div>
+      <Box
+        w="100vw"
+        h="100vh"
+        pos="absolute"
+        top="500px"
+        right="0px"
+        sx={{
+          overflow: 'hidden',
+        }}
+      >
+        <Title
+          color="white"
+          align="center"
+          ff="monospace"
+          order={4}
+          fw={200}
+          sx={{
+            textTransform: 'uppercase',
+          }}
+          w="303px"
+          bg="#750808"
+          m="0 auto"
+        >
+          what makes a place special?
+        </Title>
+      </Box>
+    </Center>
   );
 };
 
