@@ -47,7 +47,7 @@ const MadridMap: React.FC = () => {
     <Center h="100vh">
       <Map
         {...initialViewport}
-        mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
+        mapboxAccessToken="pk.eyJ1IjoieWFzbWluLWUiLCJhIjoiY2xseHExNDg0Mm11bzNkcDg3Mjdta2J5dSJ9.ocCkdr6GPfVo3cOOiTE_tA"
         mapStyle="mapbox://styles/mapbox/dark-v11"
       >
         {markers?.map((marker) => (
